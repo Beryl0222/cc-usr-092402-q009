@@ -1,10 +1,11 @@
 {
   "name": "supply-report",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "node --check src/contracts.js",
+    "build": "node --check src/contracts.js && node --check src/ledger.js && node --check src/coordination.js && node --check src/scenarios.js && node --check src/reconcile.js && node --check src/views.js",
+    "fixture": "node scripts/gen_coordination_fixture.mjs",
     "test": "node --test"
   }
 }
