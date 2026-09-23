@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "node --check src/contracts.js",
+    "build": "node --check src/contracts.js && node --check src/shortage/model.js && node --check src/shortage/ledger.js && node --check src/shortage/scenario.js && node --check src/shortage/reconciliation.js && node --check src/shortage/views.js",
     "test": "node --test"
   }
 }

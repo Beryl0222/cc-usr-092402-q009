@@ -1,0 +1,263 @@
+{
+  "schema_version": 2,
+  "record_id": "coordination-sample-001",
+  "domain": "shortage_coordination",
+  "occurred_at": "2026-09-21T08:00:00+08:00",
+  "revision": 1,
+  "source": "业务样例（脱敏）",
+  "migration_note": "v1 供应申报记录的标识与时间语义不变；本样例为协调消息序列，消息信封沿用 message_id/occurred_at，业务字段位于 payload。",
+  "messages": [
+    {
+      "message_id": "m-001",
+      "type": "round_opened",
+      "occurred_at": "2026-09-21T08:00:00+08:00",
+      "payload": { "round_id": "rd-2026-09" }
+    },
+    {
+      "message_id": "m-002",
+      "type": "capacity_declared",
+      "occurred_at": "2026-09-21T08:10:00+08:00",
+      "payload": {
+        "lot_id": "lot-E1-1001",
+        "enterprise_id": "ent-E1",
+        "drug_id": "drug-A",
+        "spec": "0.5g",
+        "factory_id": "fac-F1",
+        "line_id": "line-P1",
+        "window": { "start": "2026-10-01", "end": "2026-11-30" },
+        "quantity": 800
+      }
+    },
+    {
+      "message_id": "m-003",
+      "type": "capacity_declared",
+      "occurred_at": "2026-09-21T08:12:00+08:00",
+      "payload": {
+        "lot_id": "lot-E1-1002",
+        "enterprise_id": "ent-E1",
+        "drug_id": "drug-A",
+        "spec": "0.5g",
+        "factory_id": "fac-F1",
+        "line_id": "line-P2",
+        "window": { "start": "2026-10-01", "end": "2026-11-30" },
+        "quantity": 400
+      }
+    },
+    {
+      "message_id": "m-004",
+      "type": "demand_declared",
+      "occurred_at": "2026-09-21T09:00:00+08:00",
+      "payload": {
+        "demand_id": "dem-R1-10",
+        "region_id": "region-R1",
+        "drug_id": "drug-A",
+        "spec": "0.5g",
+        "month": "2026-10",
+        "tier": "urgent",
+        "quantity": 600
+      }
+    },
+    {
+      "message_id": "m-005",
+      "type": "demand_declared",
+      "occurred_at": "2026-09-21T09:05:00+08:00",
+      "payload": {
+        "demand_id": "dem-R2-10",
+        "region_id": "region-R2",
+        "drug_id": "drug-A",
+        "spec": "0.5g",
+        "month": "2026-10",
+        "tier": "priority",
+        "quantity": 500
+      }
+    },
+    {
+      "message_id": "m-006",
+      "type": "demand_declared",
+      "occurred_at": "2026-09-21T09:10:00+08:00",
+      "payload": {
+        "demand_id": "dem-R3-11",
+        "region_id": "region-R3",
+        "drug_id": "drug-A",
+        "spec": "0.5g",
+        "month": "2026-11",
+        "tier": "routine",
+        "quantity": 400
+      }
+    },
+    {
+      "message_id": "m-007",
+      "type": "constraint_reported",
+      "occurred_at": "2026-09-21T09:20:00+08:00",
+      "payload": {
+        "constraint_id": "con-it-01",
+        "kind": "in_transit",
+        "enterprise_id": "ent-E1",
+        "drug_id": "drug-A",
+        "spec": "0.5g",
+        "region_id": "region-R2",
+        "quantity": 100,
+        "arrives_at": "2026-10-05"
+      }
+    },
+    {
+      "message_id": "m-008",
+      "type": "constraint_reported",
+      "occurred_at": "2026-09-21T09:25:00+08:00",
+      "payload": {
+        "constraint_id": "con-mg-01",
+        "kind": "min_guarantee",
+        "region_id": "region-R2",
+        "drug_id": "drug-A",
+        "spec": "0.5g",
+        "month": "2026-10",
+        "quantity": 500
+      }
+    },
+    {
+      "message_id": "m-009",
+      "type": "commitment_proposed",
+      "occurred_at": "2026-09-21T10:00:00+08:00",
+      "payload": {
+        "commitment_id": "cmt-C1",
+        "round_id": "rd-2026-09",
+        "enterprise_id": "ent-E1",
+        "region_id": "region-R1",
+        "drug_id": "drug-A",
+        "spec": "0.5g",
+        "quantity": 600,
+        "deliveries": [
+          { "month": "2026-10", "quantity": 400 },
+          { "month": "2026-11", "quantity": 200 }
+        ],
+        "backing": [{ "lot_id": "lot-E1-1001", "quantity": 600 }]
+      }
+    },
+    {
+      "message_id": "m-010",
+      "type": "commitment_confirmed",
+      "occurred_at": "2026-09-21T10:30:00+08:00",
+      "payload": { "commitment_id": "cmt-C1", "enterprise_id": "ent-E1" }
+    },
+    {
+      "message_id": "m-011",
+      "type": "commitment_proposed",
+      "occurred_at": "2026-09-21T10:40:00+08:00",
+      "payload": {
+        "commitment_id": "cmt-C2",
+        "round_id": "rd-2026-09",
+        "enterprise_id": "ent-E1",
+        "region_id": "region-R2",
+        "drug_id": "drug-A",
+        "spec": "0.5g",
+        "quantity": 400,
+        "deliveries": [{ "month": "2026-10", "quantity": 400 }],
+        "backing": [{ "lot_id": "lot-E1-1002", "quantity": 400 }]
+      }
+    },
+    {
+      "message_id": "m-012",
+      "type": "commitment_confirmed",
+      "occurred_at": "2026-09-21T11:00:00+08:00",
+      "payload": { "commitment_id": "cmt-C2", "enterprise_id": "ent-E1" }
+    },
+    {
+      "message_id": "m-013",
+      "type": "constraint_reported",
+      "occurred_at": "2026-09-22T08:00:00+08:00",
+      "payload": {
+        "constraint_id": "con-qc-01",
+        "kind": "qc_release",
+        "lot_id": "lot-E1-1002",
+        "release_at": "2026-10-15"
+      }
+    },
+    {
+      "message_id": "m-014",
+      "type": "constraint_reported",
+      "occurred_at": "2026-09-22T08:30:00+08:00",
+      "payload": {
+        "constraint_id": "con-mt-01",
+        "kind": "maintenance",
+        "factory_id": "fac-F1",
+        "line_id": "line-P1",
+        "window": { "start": "2026-11-10", "end": "2026-11-20" }
+      }
+    },
+    {
+      "message_id": "m-015",
+      "type": "capacity_revised",
+      "occurred_at": "2026-09-22T09:00:00+08:00",
+      "payload": { "lot_id": "lot-E1-1001", "new_quantity": 700, "reason": "排产口径更新" }
+    },
+    {
+      "message_id": "m-015",
+      "type": "capacity_revised",
+      "occurred_at": "2026-09-22T09:00:00+08:00",
+      "payload": { "lot_id": "lot-E1-1001", "new_quantity": 700, "reason": "排产口径更新（重复消息）" }
+    },
+    {
+      "message_id": "m-016",
+      "type": "fulfillment_reported",
+      "occurred_at": "2026-10-08T16:00:00+08:00",
+      "payload": {
+        "fulfillment_id": "ful-001",
+        "commitment_id": "cmt-C2",
+        "delivered": [{ "month": "2026-10", "quantity": 300 }]
+      }
+    },
+    {
+      "message_id": "m-017",
+      "type": "fulfillment_corrected",
+      "occurred_at": "2026-10-09T09:00:00+08:00",
+      "payload": {
+        "correction_id": "ful-001-c1",
+        "fulfillment_id": "ful-001",
+        "delivered": [{ "month": "2026-10", "quantity": 350 }],
+        "reason": "入库回执复核后更正"
+      }
+    },
+    {
+      "message_id": "m-018",
+      "type": "manual_adjustment",
+      "occurred_at": "2026-10-12T14:00:00+08:00",
+      "payload": {
+        "adjustment_id": "adj-001",
+        "reason": "紧急调配：保障突发公共卫生任务",
+        "operations": [
+          {
+            "type": "force_withdraw",
+            "commitment_id": "cmt-C1",
+            "quantity": 100,
+            "deliveries": [{ "month": "2026-10", "quantity": 100 }]
+          }
+        ],
+        "alternatives": [
+          { "region_id": "region-R1", "arrangement": "由区域储备在 10 月 15 日前补足 100，11 月交付量不变" }
+        ]
+      }
+    },
+    {
+      "message_id": "m-019",
+      "type": "commitment_proposed",
+      "occurred_at": "2026-10-12T15:00:00+08:00",
+      "payload": {
+        "commitment_id": "cmt-C3",
+        "round_id": "rd-2026-09",
+        "enterprise_id": "ent-E1",
+        "region_id": "region-R3",
+        "drug_id": "drug-A",
+        "spec": "0.5g",
+        "quantity": 200,
+        "deliveries": [{ "month": "2026-11", "quantity": 200 }],
+        "backing": [{ "lot_id": "lot-E1-1001", "quantity": 200 }]
+      }
+    },
+    {
+      "message_id": "m-020",
+      "type": "round_closed",
+      "occurred_at": "2026-10-13T18:00:00+08:00",
+      "payload": { "round_id": "rd-2026-09" }
+    }
+  ]
+}
